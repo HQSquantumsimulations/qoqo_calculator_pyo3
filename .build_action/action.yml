@@ -1,0 +1,4 @@
+name: 'Build Manylinux Maturin'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
