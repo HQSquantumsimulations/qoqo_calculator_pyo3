@@ -1,6 +1,6 @@
 # qoqo-calculator-py03
 
-Python interface to qoqo calculator, the calculator backend of the qoqo quantum computing toolkit by [HQS Quantum Simulations](quantumsimulations.de).
+Python interface to qoqo calculator, the calculator backend of the qoqo quantum computing toolkit by [HQS Quantum Simulations](https://quantumsimulations.de).
 
 qoqo-calculator-py03 provides
 * A calculator python class that evaluates symbolic string expressions to float values
