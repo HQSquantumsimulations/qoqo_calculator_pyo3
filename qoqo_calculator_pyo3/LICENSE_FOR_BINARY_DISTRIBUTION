@@ -1,14 +1,14 @@
 The source of this software is licensed under the Apache 2.0 license (see below)
 In building the binary distribution other products the following software are also used and linked
+For Copyright notices provided by the packages see NOTIC file
 
-This product in binary form bundles pyo3 0.13.1 (Copyright (c) 2017-present, PyO3 Project and Contributors. https://github.com/PyO3), 
+This product in binary form bundles pyo3 0.13.1 (https://github.com/PyO3), 
 which is available under the Apache 2.0 license.
 
-copyright in repository probably not correct
-This product in binary form bundles num-complex 0.3.1 (Copyright (c) 2013-present, The Rust Project Developers???. https://github.com/rust-num/num-complex), 
+This product in binary form bundles num-complex 0.3.1 ( https://github.com/rust-num/num-complex), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles proc-macro2 1.0.24 (Copyright (c) 2014, Alex Crichton https://github.com/alexcrichton/proc-macro2), 
+This product in binary form bundles proc-macro2 1.0.24 (https://github.com/alexcrichton/proc-macro2), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles unicode-xid 0.2.1 ( https://github.com/unicode-rs/unicode-xid), 
@@ -17,13 +17,13 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles syn 1.0.60 ( https://github.com/dtolnay/syn), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles autocfg 1.0.1 (Copyright (c) 2018, Josh Stone https://github.com/cuviper/autocfg), 
+This product in binary form bundles autocfg 1.0.1 ( https://github.com/cuviper/autocfg), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles libc 0.2.85 (Copyright (c) 2014-2020, The Rust Project Developers https://github.com/rust-lang/libc), 
+This product in binary form bundles libc 0.2.85 ( https://github.com/rust-lang/libc), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles cfg-if 1.0.0 (Copyright (c) 2014, Alex Crichton https://github.com/alexcrichton/cfg-if), 
+This product in binary form bundles cfg-if 1.0.0 ( https://github.com/alexcrichton/cfg-if), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles serde_derive 1.0.123 ( https://github.com/serde-rs/serde), 
@@ -32,10 +32,10 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles serde 1.0.123 ( https://github.com/serde-rs/serde), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles smallvec 1.6.1 (Copyright (c) 2018, The Servo Project Developers https://github.com/servo/rust-smallvec), 
+This product in binary form bundles smallvec 1.6.1 (https://github.com/servo/rust-smallvec), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles scopeguard 1.1.0 (Copyright (c) 2016-2019, Ulrik Sverdrup "bluss" and scopeguard developers https://github.com/bluss/scopeguard), 
+This product in binary form bundles scopeguard 1.1.0 ( https://github.com/bluss/scopeguard), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles inventory 0.1.10 ( https://github.com/dtolnay/inventory), 
@@ -44,27 +44,26 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles unindent 0.1.7 ( https://github.com/dtolnay/indoc), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles paste 1.0.4 (Copyright (c) 2018, (no name) https://github.com/dtolnay/paste), 
+This product in binary form bundles paste 1.0.4 ( https://github.com/dtolnay/paste), 
 which is available under the Apache 2.0 license.
 
-copyright in repository probably not correct
-This product in binary form bundles lock_api 0.4.2 (Copyright (c) 2016, The Rust Project Developers https://github.com/Amanieu/parking_lot), 
+This product in binary form bundles lock_api 0.4.2 ( https://github.com/Amanieu/parking_lot), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles indoc 1.0.3 ( https://github.com/dtolnay/indoc), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles num-traits 0.2.14 (Copyright (c) 2014, The Rust Project Developers https://github.com/rust-num/num-traits), 
+This product in binary form bundles num-traits 0.2.14 ( https://github.com/rust-num/num-traits), 
 which is available under the Apache 2.0 license.
 
 copyright in repository probably not correct
-This product in binary form bundles quote 1.0.8 (Copyright (c) 2016, The Rust Project Developers https://github.com/dtolnay/quote), 
+This product in binary form bundles quote 1.0.8 ( https://github.com/dtolnay/quote), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles parking_lot_core 0.8.2 (Copyright (c) 2016, Amanieu d'Antras https://github.com/Amanieu/parking_lot), 
+This product in binary form bundles parking_lot_core 0.8.2 ( https://github.com/Amanieu/parking_lot), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles parking_lot 0.11.1 (Copyright (c) 2016, Amanieu d'Antras https://github.com/Amanieu/parking_lot), 
+This product in binary form bundles parking_lot 0.11.1 ( https://github.com/Amanieu/parking_lot), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles inventory-impl 0.1.10 ( https://github.com/dtolnay/inventory), 
@@ -82,10 +81,9 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles thiserror 1.0.23 ( https://github.com/dtolnay/thiserror), 
 which is available under the Apache 2.0 license.
 
-This product in binary form links dynamically against Python (Copyright © 2001-2021 Python Software Foundation; All Rights
-Reserved) available under the Python license. For full license text see file qoqo_calculator_py03/PYTHON_LICENSE
+This product in binary form links dynamically against Python  available under the Python license. For full license text see file qoqo_calculator_py03/PYTHON_LICENSE
 
-This product in binary form bundles instant 0.1.9 (Copyright (c) 2019, Sébastien Crozet https://github.com/sebcrozet/instant), 
+This product in binary form bundles instant 0.1.9 ( https://github.com/sebcrozet/instant), 
 which is available under the BSD 3-clause license. For full license text see file qoqo_calculator_py03/BSD_LICENSE
 
 
