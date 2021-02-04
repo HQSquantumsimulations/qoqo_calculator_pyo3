@@ -62,7 +62,7 @@ jobs:
         uses: addnab/docker-run-action@v1
         with:
           image: konstin2/maturin
-          options: -v ($GITHUB_WORKSPACE):/io
+          options: -v /home/runner/work/qoqo_calculator_pyo3/qoqo_calculator_pyo3:/io
           run: maturin build --release --manylinux 2010
       - name: Publish
         env:
