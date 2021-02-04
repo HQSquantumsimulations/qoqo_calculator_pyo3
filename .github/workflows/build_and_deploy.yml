@@ -57,11 +57,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install twine
+          ls /github/workspace
       - name: Build Manylinux Maturin
         uses: addnab/docker-run-action@v1
         with:
           image: konstin2/maturin
-          options: -v $(pwd):/io
+          options: -v /github/workspace:/io
           run: maturin build --release --manylinux 2010
       - name: Publish
         env:
