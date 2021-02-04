@@ -60,7 +60,7 @@ jobs:
       - name: Build Manylinux Maturin
         uses: addnab/docker-run-action@v1
         with:
-          image: docker:latest
+          image: konstin2/maturin
           run: maturin build --release --manylinux 2010
       - name: Publish
         env:
