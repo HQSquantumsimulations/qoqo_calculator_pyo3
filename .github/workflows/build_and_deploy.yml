@@ -9,20 +9,20 @@ on:
     types: [created]
 
 jobs:
-  deploy_cratesio:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions-rs/toolchain@v1
-      with:
-        profile: minimal
-        toolchain: stable
-        default: true
-    - name: setup cargo
-      run: |
-        cargo login ${{ secrets.CARGO_TOKEN }}
-        cargo package
-        cargo publish
+  # deploy_cratesio:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - uses: actions-rs/toolchain@v1
+  #     with:
+  #       profile: minimal
+  #       toolchain: stable
+  #       default: true
+  #   - name: setup cargo
+  #     run: |
+  #       cargo login ${{ secrets.CARGO_TOKEN }}
+  #       cargo package
+  #       cargo publish
 
   deploy_pypi_manylinux:
 
