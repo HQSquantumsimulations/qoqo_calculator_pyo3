@@ -51,6 +51,7 @@ jobs:
       - name: build
         run: |
           maturin build -i ${{ matrix.python.interpreter }}
+          pip install target/wheels/*
           
       - name: test
         run: |
