@@ -50,7 +50,7 @@ jobs:
   deploy_pypi_manylinux:
 
       runs-on: ubuntu-latest
-      container: konstin2/maturin
+      #container: konstin2/maturin
       steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -58,7 +58,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install twine
       - name: Build Manylinux Maturin
-        run: maturin build --release --manylinux 2010
+        uses: addnab/docker-run-action@v1
+        with:
+          image: docker:latest
+          run: maturin build --release --manylinux 2010
       - name: Publish
         env:
           TWINE_USERNAME: __token__
