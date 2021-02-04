@@ -61,7 +61,7 @@ jobs:
         uses: addnab/docker-run-action@v1
         with:
           image: konstin2/maturin
-          options: --rm -v $GITHUB_WORKSPACE:/io
+          options: -v $(pwd):/io
           run: maturin build --release --manylinux 2010
       - name: Publish
         env:
