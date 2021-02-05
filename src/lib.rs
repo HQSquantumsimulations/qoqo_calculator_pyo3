@@ -28,7 +28,7 @@ fn parse_string(expression: &str) -> PyResult<f64> {
     parse_str(expression)
 }
 
-/// qoqo_calculator_py03 module bringing the qoqo_calculator rust library to python
+/// qoqo_calculator_pyo3 module bringing the qoqo_calculator rust library to python
 ///
 /// rcalcultor is a rust library implementing CalculatorFloat, a type that can
 /// contain a float or a symbolic math expression in string form.
@@ -36,7 +36,7 @@ fn parse_string(expression: &str) -> PyResult<f64> {
 /// Uses the pyo3 rust crate to create the python bindings.
 ///
 #[pymodule]
-fn qoqo_calculator_py03(_py: Python, m: &PyModule) -> PyResult<()> {
+fn qoqo_calculator_pyo3(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<CalculatorWrapper>()?;
     m.add_class::<CalculatorFloatWrapper>()?;
     m.add_class::<CalculatorComplexWrapper>()?;

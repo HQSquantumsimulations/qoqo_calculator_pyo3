@@ -56,7 +56,7 @@ pub fn convert_into_calculator_float(input: &PyAny) -> Result<CalculatorFloat, C
     }
 }
 
-#[pyclass(name = "CalculatorFloat", module = "qoqo_calculator_py03")]
+#[pyclass(name = "CalculatorFloat", module = "qoqo_calculator_pyo3")]
 #[derive(Clone, Debug)]
 pub struct CalculatorFloatWrapper {
     pub cf_internal: CalculatorFloat,
