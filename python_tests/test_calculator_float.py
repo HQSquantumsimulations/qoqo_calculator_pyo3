@@ -14,7 +14,7 @@ import sys
 import numpy as np
 import numpy.testing as npt
 import os
-from qoqo_calculator_py03 import CalculatorFloat
+from qoqo_calculator_pyo3 import CalculatorFloat
 import math
 
 def test_number():

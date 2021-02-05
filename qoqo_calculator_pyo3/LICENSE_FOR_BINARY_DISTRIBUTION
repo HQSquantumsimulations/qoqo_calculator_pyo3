@@ -81,10 +81,10 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles thiserror 1.0.23 ( https://github.com/dtolnay/thiserror), 
 which is available under the Apache 2.0 license.
 
-This product in binary form links dynamically against Python  available under the Python license. For full license text see file qoqo_calculator_py03/PYTHON_LICENSE
+This product in binary form links dynamically against Python  available under the Python license. For full license text see file qoqo_calculator_pyo3/PYTHON_LICENSE
 
 This product in binary form bundles instant 0.1.9 ( https://github.com/sebcrozet/instant), 
-which is available under the BSD 3-clause license. For full license text see file qoqo_calculator_py03/BSD_LICENSE
+which is available under the BSD 3-clause license. For full license text see file qoqo_calculator_pyo3/BSD_LICENSE
 
 
 
