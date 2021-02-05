@@ -1,12 +1,12 @@
 [package]
-name = "qoqo_calculator_py03"
-version = "0.1.4"
+name = "qoqo_calculator_pyo3"
+version = "0.1.5"
 authors = ["HQS Quantum Simulations <info@quantumsimulations.de>"]
 license-file = "qoqo_calculator_py03/LICENSE_FOR_BINARY_DISTRIBUTION"
 edition = "2018"
 
 [lib]
-name = "qoqo_calculator_py03"
+name = "qoqo_calculator_pyo3"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]

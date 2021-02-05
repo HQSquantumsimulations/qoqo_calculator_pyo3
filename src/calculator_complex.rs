@@ -46,7 +46,7 @@ impl IntoCalculatorComplex {
     }
 }
 
-#[pyclass(name = "CalculatorComplex", module = "qoqo_calculator_py03")]
+#[pyclass(name = "CalculatorComplex", module = "qoqo_calculator_pyo3")]
 #[derive(Clone, Debug)]
 pub struct CalculatorComplexWrapper {
     pub cc_internal: CalculatorComplex,

@@ -15,7 +15,7 @@ use pyo3::exceptions::PyValueError;
 use pyo3::prelude::*;
 use qoqo_calculator::Calculator;
 
-#[pyclass(name = "Calculator", module = "qoqo_calculator_py03")]
+#[pyclass(name = "Calculator", module = "qoqo_calculator_pyo3")]
 pub struct CalculatorWrapper {
     r_calculator: Calculator,
 }
