@@ -149,10 +149,7 @@ impl CalculatorComplexWrapper {
     }
 
     #[staticmethod]
-    fn from_pair(
-        re: IntoCalculatorFloat,
-        im: IntoCalculatorFloat,
-    ) -> CalculatorComplexWrapper {
+    fn from_pair(re: IntoCalculatorFloat, im: IntoCalculatorFloat) -> CalculatorComplexWrapper {
         let re_cf = re.cast_to_calculator_float();
         let im_cf = im.cast_to_calculator_float();
         Self {
