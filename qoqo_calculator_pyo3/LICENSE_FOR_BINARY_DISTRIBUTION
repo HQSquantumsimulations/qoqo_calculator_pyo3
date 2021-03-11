@@ -2,84 +2,103 @@ The source of this software is licensed under the Apache 2.0 license (see below)
 In building the binary distribution other products the following software are also used and linked
 For Copyright notices provided by the packages see NOTIC file
 
-This product in binary form bundles pyo3 0.13.1 (https://github.com/PyO3), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles num-complex 0.3.1 ( https://github.com/rust-num/num-complex), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles proc-macro2 1.0.24 (https://github.com/alexcrichton/proc-macro2), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles unicode-xid 0.2.1 ( https://github.com/unicode-rs/unicode-xid), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles syn 1.0.60 ( https://github.com/dtolnay/syn), 
-which is available under the Apache 2.0 license.
-
 This product in binary form bundles autocfg 1.0.1 ( https://github.com/cuviper/autocfg), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles libc 0.2.85 ( https://github.com/rust-lang/libc), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles cfg-if 1.0.0 ( https://github.com/alexcrichton/cfg-if), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles serde_derive 1.0.123 ( https://github.com/serde-rs/serde), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles serde 1.0.123 ( https://github.com/serde-rs/serde), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles smallvec 1.6.1 (https://github.com/servo/rust-smallvec), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles scopeguard 1.1.0 ( https://github.com/bluss/scopeguard), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles inventory 0.1.10 ( https://github.com/dtolnay/inventory), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles unindent 0.1.7 ( https://github.com/dtolnay/indoc), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles paste 1.0.4 ( https://github.com/dtolnay/paste), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles lock_api 0.4.2 ( https://github.com/Amanieu/parking_lot), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles indoc 1.0.3 ( https://github.com/dtolnay/indoc), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles num-traits 0.2.14 ( https://github.com/rust-num/num-traits), 
-which is available under the Apache 2.0 license.
-
-copyright in repository probably not correct
-This product in binary form bundles quote 1.0.8 ( https://github.com/dtolnay/quote), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles parking_lot_core 0.8.2 ( https://github.com/Amanieu/parking_lot), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles parking_lot 0.11.1 ( https://github.com/Amanieu/parking_lot), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles inventory-impl 0.1.10 ( https://github.com/dtolnay/inventory), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles ctor 0.1.18 ( https://github.com/mmastrac/rust-ctor), 
-which is available under the Apache 2.0 license.
-
-This product in binary form bundles thiserror-impl 1.0.23 ( https://github.com/dtolnay/thiserror), 
+This product in binary form bundles ctor 0.1.19 ( https://github.com/mmastrac/rust-ctor), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles ghost 0.1.2 ( https://github.com/dtolnay/ghost), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles thiserror 1.0.23 ( https://github.com/dtolnay/thiserror), 
+This product in binary form bundles indoc 0.3.6 ( https://github.com/dtolnay/indoc), 
 which is available under the Apache 2.0 license.
+
+This product in binary form bundles indoc-impl 0.3.6 ( https://github.com/dtolnay/indoc), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles instant 0.1.9 ( https://github.com/sebcrozet/instant), 
+which is available under the BSD 3-clause license.
+
+This product in binary form bundles inventory 0.1.10 ( https://github.com/dtolnay/inventory), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles inventory-impl 0.1.10 ( https://github.com/dtolnay/inventory), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles libc 0.2.88 ( https://github.com/rust-lang/libc), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles lock_api 0.4.2 ( https://github.com/Amanieu/parking_lot), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles num-complex 0.3.1 ( https://github.com/rust-num/num-complex), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles num-traits 0.2.14 ( https://github.com/rust-num/num-traits), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles parking_lot 0.11.1 ( https://github.com/Amanieu/parking_lot), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles parking_lot_core 0.8.3 ( https://github.com/Amanieu/parking_lot), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles paste 0.1.18 ( https://github.com/dtolnay/paste), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles paste-impl 0.1.18 ( https://github.com/dtolnay/paste), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles proc-macro-hack 0.5.19 (https://github.com/dtolnay/proc-macro-hack), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles proc-macro2 1.0.24 (https://github.com/alexcrichton/proc-macro2), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles pyo3 0.13.2 (https://github.com/PyO3), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles pyo3-macros 0.13.2 (https://github.com/PyO3), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles pyo3-macros-backend 0.13.2 (https://github.com/PyO3), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles quote 1.0.9 ( https://github.com/dtolnay/quote), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles scopeguard 1.1.0 ( https://github.com/bluss/scopeguard), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles serde 1.0.124 ( https://github.com/serde-rs/serde), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles serde_derive 1.0.124 ( https://github.com/serde-rs/serde), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles smallvec 1.6.1 (https://github.com/servo/rust-smallvec), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles syn 1.0.63 ( https://github.com/dtolnay/syn), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles thiserror 1.0.24 ( https://github.com/dtolnay/thiserror), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles thiserror-impl 1.0.24 ( https://github.com/dtolnay/thiserror), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles unicode-xid 0.2.1 ( https://github.com/unicode-rs/unicode-xid), 
+which is available under the Apache 2.0 license.
+
+This product in binary form bundles unindent 0.1.7 ( https://github.com/dtolnay/indoc), 
+which is available under the Apache 2.0 license.
+
+
 
 This product in binary form links dynamically against Python  available under the Python license. For full license text see file qoqo_calculator_pyo3/PYTHON_LICENSE
 
