@@ -1,6 +1,6 @@
 [package]
 name = "qoqo_calculator_pyo3"
-version = "0.1.5"
+version = "0.2.0"
 authors = ["HQS Quantum Simulations <info@quantumsimulations.de>"]
 license-file = "qoqo_calculator_pyo3/LICENSE_FOR_BINARY_DISTRIBUTION"
 edition = "2018"
@@ -13,32 +13,14 @@ name = "qoqo_calculator_pyo3"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-num-complex = "=0.3.1"
-qoqo_calculator = "0.1.0"
+num-complex = "0.3" # older version to avoid issues with pyo3
+qoqo_calculator = "0.1.1"
 # Dependencies listed in exact version
-libc = "=0.2.86"
-serde =  "=1.0.123"
-proc-macro2 = "=1.0.24"
-unicode-xid ="=0.2.1"
-syn = "=1.0.60"
-autocfg = "=1.0.1"
-cfg-if = "=1.0.0"
-smallvec = "=1.6.1"
-scopeguard = "=1.1.0"
-inventory = "=0.1.10"
-unindent = "=0.1.7"
-paste = "=1.0.4"
-lock_api = "=0.4.2"
-indoc = "=1.0.3"
-quote = "=1.0.8"
-parking_lot = "=0.11.1"
-inventory-impl = "=0.1.10"
-thiserror = "=1.0.23"
-ghost = "=0.1.2"
-instant = "=0.1.9"
+serde =  "1.0"
+thiserror = "1.0"
 
 [dependencies.pyo3]
-version = "=0.13.1"
+version = "0.13"
 features = ["num-complex"]
 
 [features]

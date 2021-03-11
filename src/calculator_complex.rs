@@ -76,23 +76,23 @@ impl CalculatorComplexWrapper {
         }
     }
 
-    fn __copy__(&self) -> PyResult<CalculatorComplexWrapper> {
-        Ok(self.clone())
+    fn __copy__(&self) -> CalculatorComplexWrapper {
+        self.clone()
     }
 
-    fn __deepcopy__(&self, _memodict: Py<PyAny>) -> PyResult<CalculatorComplexWrapper> {
-        Ok(self.clone())
+    fn __deepcopy__(&self, _memodict: Py<PyAny>) -> CalculatorComplexWrapper {
+        self.clone()
     }
 
-    fn __getnewargs_ex__(&self) -> PyResult<((PyObject,), HashMap<String, String>)> {
+    fn __getnewargs_ex__(&self) -> ((PyObject,), HashMap<String, String>) {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
         let x = 0.0;
         let object = x.to_object(py);
-        Ok(((object,), HashMap::new()))
+        ((object,), HashMap::new())
     }
 
-    fn __getstate__(&self) -> PyResult<(PyObject, PyObject)> {
+    fn __getstate__(&self) -> (PyObject, PyObject) {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
         let object_real = match self.cc_internal.re {
@@ -103,15 +103,14 @@ impl CalculatorComplexWrapper {
             CalculatorFloat::Float(ref x) => x.to_object(py),
             CalculatorFloat::Str(ref x) => x.to_object(py),
         };
-        Ok((object_real, object_imag))
+        (object_real, object_imag)
     }
 
-    fn __setstate__(&mut self, state: (IntoCalculatorFloat, IntoCalculatorFloat)) -> PyResult<()> {
-        *self = CalculatorComplexWrapper::from_pair(state.0, state.1).unwrap();
-        Ok(())
+    fn __setstate__(&mut self, state: (IntoCalculatorFloat, IntoCalculatorFloat)) {
+        *self = CalculatorComplexWrapper::from_pair(state.0, state.1);
     }
 
-    fn to_dict(&self) -> PyResult<HashMap<String, PyObject>> {
+    fn to_dict(&self) -> HashMap<String, PyObject> {
         let mut dict = HashMap::new();
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -132,56 +131,53 @@ impl CalculatorComplexWrapper {
                 dict.insert("imag".to_string(), x.to_object(py));
             }
         }
-        Ok(dict)
+        dict
     }
 
     #[getter]
-    fn real(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn real(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cc_internal.re.clone(),
-        })
+        }
     }
 
     #[getter]
-    fn imag(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn imag(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cc_internal.im.clone(),
-        })
+        }
     }
 
     #[staticmethod]
-    fn from_pair(
-        re: IntoCalculatorFloat,
-        im: IntoCalculatorFloat,
-    ) -> PyResult<CalculatorComplexWrapper> {
+    fn from_pair(re: IntoCalculatorFloat, im: IntoCalculatorFloat) -> CalculatorComplexWrapper {
         let re_cf = re.cast_to_calculator_float();
         let im_cf = im.cast_to_calculator_float();
-        Ok(Self {
+        Self {
             cc_internal: CalculatorComplex::new(re_cf, im_cf),
-        })
+        }
     }
 
-    fn conj(&self) -> PyResult<CalculatorComplexWrapper> {
-        Ok(Self {
+    fn conj(&self) -> CalculatorComplexWrapper {
+        Self {
             cc_internal: self.cc_internal.conj(),
-        })
+        }
     }
 
-    fn arg(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn arg(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cc_internal.arg(),
-        })
+        }
     }
 
-    fn isclose(&self, other: IntoCalculatorComplex) -> PyResult<bool> {
+    fn isclose(&self, other: IntoCalculatorComplex) -> bool {
         let other_cc = other.cast_to_calculator_complex();
-        Ok(self.cc_internal.isclose(other_cc))
+        self.cc_internal.isclose(other_cc)
     }
 
-    fn abs(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn abs(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cc_internal.norm(),
-        })
+        }
     }
 }
 
