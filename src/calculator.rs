@@ -29,9 +29,8 @@ impl CalculatorWrapper {
         CalculatorWrapper { r_calculator }
     }
 
-    fn set(&mut self, variable_string: &str, val: f64) -> PyResult<()> {
+    fn set(&mut self, variable_string: &str, val: f64) {
         self.r_calculator.set_variable(variable_string, val);
-        Ok(())
     }
 
     pub fn parse_str(&mut self, input: &str) -> PyResult<f64> {

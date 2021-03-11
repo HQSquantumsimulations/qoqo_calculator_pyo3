@@ -80,95 +80,95 @@ impl CalculatorFloatWrapper {
         }
     }
 
-    fn __copy__(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(self.clone())
+    fn __copy__(&self) -> CalculatorFloatWrapper {
+        self.clone()
     }
 
-    fn __deepcopy__(&self, _memodict: Py<PyAny>) -> PyResult<CalculatorFloatWrapper> {
-        Ok(self.clone())
+    fn __deepcopy__(&self, _memodict: Py<PyAny>) -> CalculatorFloatWrapper {
+        self.clone()
     }
 
-    fn __getnewargs_ex__(&self) -> PyResult<((PyObject,), HashMap<String, String>)> {
+    fn __getnewargs_ex__(&self) -> ((PyObject,), HashMap<String, String>) {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
         let object = match self.cf_internal {
             CalculatorFloat::Float(ref x) => x.to_object(py),
             CalculatorFloat::Str(ref x) => x.to_object(py),
         };
-        Ok(((object,), HashMap::new()))
+        ((object,), HashMap::new())
     }
 
     #[getter]
-    fn is_float(&self) -> PyResult<bool> {
-        Ok(self.cf_internal.is_float())
+    fn is_float(&self) -> bool {
+        self.cf_internal.is_float()
     }
 
-    fn sqrt(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn sqrt(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.sqrt(),
-        })
+        }
     }
 
-    fn atan2(&self, other: IntoCalculatorFloat) -> PyResult<CalculatorFloatWrapper> {
+    fn atan2(&self, other: IntoCalculatorFloat) -> CalculatorFloatWrapper {
         let other_cf = other.cast_to_calculator_float();
-        Ok(CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.atan2(other_cf),
-        })
+        }
     }
 
-    fn isclose(&self, other: IntoCalculatorFloat) -> PyResult<bool> {
+    fn isclose(&self, other: IntoCalculatorFloat) -> bool {
         let other_cf = other.cast_to_calculator_float();
-        Ok(self.cf_internal.isclose(other_cf))
+        self.cf_internal.isclose(other_cf)
     }
 
-    fn exp(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn exp(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.exp(),
-        })
+        }
     }
 
-    fn sin(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn sin(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.sin(),
-        })
+        }
     }
 
-    fn cos(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn cos(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.cos(),
-        })
+        }
     }
 
-    fn acos(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn acos(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.acos(),
-        })
+        }
     }
 
-    fn abs(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn abs(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.abs(),
-        })
+        }
     }
 
-    fn signum(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn signum(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.signum(),
-        })
+        }
     }
 
-    fn sign(&self) -> PyResult<CalculatorFloatWrapper> {
-        Ok(CalculatorFloatWrapper {
+    fn sign(&self) -> CalculatorFloatWrapper {
+        CalculatorFloatWrapper {
             cf_internal: self.cf_internal.signum(),
-        })
+        }
     }
     #[getter]
-    fn value(&self) -> PyResult<PyObject> {
+    fn value(&self) -> PyObject {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
         match self.cf_internal {
-            CalculatorFloat::Float(ref x) => Ok(x.to_object(py)),
-            CalculatorFloat::Str(ref x) => Ok(x.to_object(py)),
+            CalculatorFloat::Float(ref x) => x.to_object(py),
+            CalculatorFloat::Str(ref x) => x.to_object(py),
         }
     }
 }
