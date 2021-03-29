@@ -10,8 +10,8 @@
 // express or implied. See the License for the specific language governing permissions and
 // limitations underthe License.
 
-use crate::IntoCalculatorFloat;
-use pyo3::exceptions::PyValueError;
+use crate::convert_into_calculator_float;
+use pyo3::exceptions::{PyValueError, PyTypeError};
 use pyo3::prelude::*;
 use qoqo_calculator::Calculator;
 
@@ -43,13 +43,11 @@ impl CalculatorWrapper {
         }
     }
 
-    pub fn parse_get(&mut self, input: IntoCalculatorFloat) -> PyResult<f64> {
-        let out = match input {
-            IntoCalculatorFloat::CF(cfw) => self.r_calculator.parse_get(cfw.cf_internal),
-            IntoCalculatorFloat::S(expression) => self.r_calculator.parse_str(&expression),
-            IntoCalculatorFloat::F(fl) => Ok(fl),
-            IntoCalculatorFloat::I(fl) => Ok(fl as f64),
-        };
+    pub fn parse_get(&mut self, input: &PyAny) -> PyResult<f64> {
+        let converted = convert_into_calculator_float(input).map_err(|_| {
+            PyTypeError::new_err("Input can not be converted to Calculator Float")
+        })?;
+        let out = self.r_calculator.parse_get(converted);
         match out {
             Ok(x) => Ok(x),
             Err(x) => Err(PyValueError::new_err(format!("{:?}", x))),

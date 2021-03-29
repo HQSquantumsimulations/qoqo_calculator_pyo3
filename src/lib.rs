@@ -13,12 +13,11 @@
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
 mod calculator_float;
-pub use calculator_float::convert_into_calculator_float;
 pub use calculator_float::CalculatorFloatWrapper;
-pub use calculator_float::IntoCalculatorFloat;
+pub use calculator_float::convert_into_calculator_float;
 mod calculator_complex;
 pub use calculator_complex::CalculatorComplexWrapper;
-pub use calculator_complex::IntoCalculatorComplex;
+pub use calculator_complex::convert_into_calculator_complex;
 mod calculator;
 pub use calculator::parse_str;
 pub use calculator::CalculatorWrapper;
