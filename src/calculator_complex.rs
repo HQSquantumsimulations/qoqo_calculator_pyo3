@@ -20,36 +20,26 @@ use pyo3::{PyNumberProtocol, PyObjectProtocol};
 use qoqo_calculator::{CalculatorError, CalculatorFloat, CalculatorComplex};
 use std::collections::HashMap;
 use std::convert::TryInto;
-use std::convert::From;
 use std::panic::catch_unwind;
 
 pub fn convert_into_calculator_complex(input: &PyAny) -> Result<CalculatorComplex, CalculatorError> {
-    let try_c64_conversion = input.call_method0("__complex__");
-    match try_c64_conversion {
-        Ok(x) => Ok(CalculatorComplex::from(
-            Complex::<f64>::extract(x).map_err(|_| CalculatorError::NotConvertable)?
-        )),
-        _ => {
-            let try_real_part = input.call_method0("real");
-            match try_real_part {
-                Ok(x) => {
-                    let real_part_converted = convert_into_calculator_float(x).map_err(|_| {
-                        PyTypeError::new_err("Real part can not be converted to Calculator Float")
-                    })?;
-                    let try_imag_part = input.call_method0("imag");
-                    match try_real_part {
-                        Ok(y) => {
-                            let imag_part_converted = convert_into_calculator_float(y).map_err(|_| {
-                                PyTypeError::new_err("Imag part can not be converted to Calculator Float")
-                            })?;
-                            Ok(CalculatorComplex::new(real_part_converted, imag_part_converted))
-                        }
-                        _ => Err(CalculatorError::NotConvertable),
-                    }
-                _ => Err(CalculatorError::NotConvertable),    
-                }               
+    let try_real_part = input.getattr("real");
+    match try_real_part {
+        Ok(x) => {
+            let real_part_converted = convert_into_calculator_float(x)?;
+            let try_imag_part = input.getattr("imag");
+            match try_imag_part {
+                Ok(y) => {
+                    let imag_part_converted = convert_into_calculator_float(y)?;
+                    Ok(CalculatorComplex::new(real_part_converted, imag_part_converted))
+                }
+                _ => Err(CalculatorError::NotConvertable),
             }
         }
+        _ => {
+            let str_converted = convert_into_calculator_float(input)?;
+            Ok(CalculatorComplex::new(str_converted, 0.0))
+            }
     }
 }
 
@@ -64,7 +54,7 @@ impl CalculatorComplexWrapper {
     #[new]
     fn new(input: &PyAny) -> PyResult<Self> {
         let converted = convert_into_calculator_complex(input).map_err(|_| {
-            PyTypeError::new_err("Input can not be converted to Calculator Float")
+            PyTypeError::new_err("Input can not be converted to Calculator Complex")
         })?;
         Ok(CalculatorComplexWrapper {
                 cc_internal: converted,
@@ -101,8 +91,9 @@ impl CalculatorComplexWrapper {
         (object_real, object_imag)
     }
 
-    fn __setstate__(&mut self, state: (Py<PyAny>, Py<PyAny>)) {
-        *self = CalculatorComplexWrapper::from_pair(state.0, state.1);
+    fn __setstate__(&mut self, state: (Py<PyAny>, Py<PyAny>)) -> PyResult<()> {
+        *self = CalculatorComplexWrapper::from_pair(state.0, state.1)?;
+        Ok(())
     }
 
     fn to_dict(&self) -> HashMap<String, PyObject> {

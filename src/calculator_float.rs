@@ -27,11 +27,16 @@ pub fn convert_into_calculator_float(input: &PyAny) -> Result<CalculatorFloat, C
             f64::extract(x).map_err(|_| CalculatorError::NotConvertable)?,
         )),
         _ => {
-            let try_str_conversion = input.call_method0("__str__");
+            let try_str_conversion = input.get_type().name();
             match try_str_conversion {
-                Ok(x) => Ok(CalculatorFloat::from(
-                    String::extract(x).map_err(|_| CalculatorError::NotConvertable)?,
+                Ok("str") => Ok(CalculatorFloat::from(
+                    String::extract(input).map_err(|_| CalculatorError::NotConvertable)?,
                 )),
+                Ok("CalculatorFloat") => {
+                    let try_cf_conversion = input.call_method0("__str__").map_err(|_| CalculatorError::NotConvertable)?;
+                    Ok(CalculatorFloat::from(
+                        String::extract(try_cf_conversion).map_err(|_| CalculatorError::NotConvertable)?))
+                },
                 _ => Err(CalculatorError::NotConvertable),
             }
         }
