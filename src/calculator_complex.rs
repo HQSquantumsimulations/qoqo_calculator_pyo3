@@ -10,6 +10,11 @@
 // express or implied. See the License for the specific language governing permissions and
 // limitations underthe License.
 
+//! calculator_float module
+//!
+//! Converts the qoqo_calculator CalculatorComplex struct and methods for parsing and evaluating
+//! mathematical expressions in string form to complex into a Python class.
+
 use crate::{CalculatorFloatWrapper, convert_into_calculator_float};
 use num_complex::Complex;
 use pyo3::class::basic::CompareOp;
@@ -22,6 +27,17 @@ use std::collections::HashMap;
 use std::convert::TryInto;
 use std::panic::catch_unwind;
 
+/// Convert an f64 float (or any input that can be cast to float) or a string to CalculatorComplex.
+///
+/// # Arguments
+///
+/// * `input` - the input to be converted to CalculatorComplex
+///
+/// # Returns
+///
+/// `CalculatorFloat` - the input converted to CalculatorComplex
+/// `CalculatorError` - error in the conversion process
+///
 pub fn convert_into_calculator_complex(input: &PyAny) -> Result<CalculatorComplex, CalculatorError> {
     let try_real_part = input.getattr("real");
     match try_real_part {
@@ -39,7 +55,7 @@ pub fn convert_into_calculator_complex(input: &PyAny) -> Result<CalculatorComple
         _ => {
             let str_converted = convert_into_calculator_float(input)?;
             Ok(CalculatorComplex::new(str_converted, 0.0))
-            }
+        }
     }
 }
 
@@ -49,8 +65,19 @@ pub struct CalculatorComplexWrapper {
     pub cc_internal: CalculatorComplex,
 }
 
+/// Python wrapper for rust CalculatorComplex from qoqo_calculator.
 #[pymethods]
 impl CalculatorComplexWrapper {
+    /// Create new Python instance of CalculatorComplexWrapper.
+    ///
+    /// # Arguments
+    ///
+    /// * `input` - input to instantiate the CalculatorComplex with
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<Self>` - CalculatorComplexWrapper of converted input or corresponding Python error
+    ///
     #[new]
     fn new(input: &PyAny) -> PyResult<Self> {
         let converted = convert_into_calculator_complex(input).map_err(|_| {
@@ -61,14 +88,32 @@ impl CalculatorComplexWrapper {
         })
     }
 
+    /// Create Python copy of CalculatorComplexWrapper.
+    ///
+    /// # Returns
+    ///
+    /// `CalculatorComplexWrapper` - clone of CalculatorFloat in a CalculatorComplexWrapper
+    ///
     fn __copy__(&self) -> CalculatorComplexWrapper {
         self.clone()
     }
 
+    /// Create Python deep copy of CalculatorComplexWrapper.
+    ///
+    /// # Returns
+    ///
+    /// `CalculatorComplexWrapper` - clone of CalculatorFloat in a CalculatorComplexWrapper
+    ///
     fn __deepcopy__(&self, _memodict: Py<PyAny>) -> CalculatorComplexWrapper {
         self.clone()
     }
 
+    /// Get new arguments for Python of CalculatorComplexWrapper.
+    ///
+    /// # Returns
+    ///
+    /// `((PyObject,), HashMap<String, String>)` - arguments of CalculatorComplex
+    ///
     fn __getnewargs_ex__(&self) -> ((PyObject,), HashMap<String, String>) {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -77,6 +122,12 @@ impl CalculatorComplexWrapper {
         ((object,), HashMap::new())
     }
 
+    /// Get real and imaginary parts of CalculatorComplexWrapper for Python.
+    ///
+    /// # Returns
+    ///
+    /// `(PyObject, PyObject)` - real and imaginary parts of CalculatorComplex
+    ///
     fn __getstate__(&self) -> (PyObject, PyObject) {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -91,11 +142,13 @@ impl CalculatorComplexWrapper {
         (object_real, object_imag)
     }
 
+    /// Set real and imaginary parts of CalculatorComplexWrapper for Python.
     fn __setstate__(&mut self, state: (Py<PyAny>, Py<PyAny>)) -> PyResult<()> {
         *self = CalculatorComplexWrapper::from_pair(state.0, state.1)?;
         Ok(())
     }
 
+    /// Convert contents of CalculatorComplex to a Python dictionary.
     fn to_dict(&self) -> HashMap<String, PyObject> {
         let mut dict = HashMap::new();
         let gil = pyo3::Python::acquire_gil();
@@ -120,6 +173,7 @@ impl CalculatorComplexWrapper {
         dict
     }
 
+    /// Get real part of CalculatorComplex.
     #[getter]
     fn real(&self) -> CalculatorFloatWrapper {
         CalculatorFloatWrapper {
@@ -127,6 +181,7 @@ impl CalculatorComplexWrapper {
         }
     }
 
+    /// Get imaginary part of CalculatorComplex.
     #[getter]
     fn imag(&self) -> CalculatorFloatWrapper {
         CalculatorFloatWrapper {
@@ -134,6 +189,7 @@ impl CalculatorComplexWrapper {
         }
     }
 
+    /// Create a new instance of CalculatorComplex from a pair of values.
     #[staticmethod]
     fn from_pair(re: Py<PyAny>, im: Py<PyAny>) -> PyResult<CalculatorComplexWrapper> {
         let gil = pyo3::Python::acquire_gil();
@@ -151,18 +207,21 @@ impl CalculatorComplexWrapper {
         })
     }
 
+    /// Return complex conjugate of x: x*=x.re-i*x.im.
     fn conj(&self) -> CalculatorComplexWrapper {
         Self {
             cc_internal: self.cc_internal.conj(),
         }
     }
 
+    /// Return phase of complex number x: arg(x).
     fn arg(&self) -> CalculatorFloatWrapper {
         CalculatorFloatWrapper {
             cf_internal: self.cc_internal.arg(),
         }
     }
 
+    /// Return true when x is close to y.
     fn isclose(&self, other: Py<PyAny>) -> PyResult<bool> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -173,6 +232,7 @@ impl CalculatorComplexWrapper {
         Ok(self.cc_internal.isclose(other_cc))
     }
 
+    /// Return absolute value of complex number x: |x|=(x.re^2+x.im^2)^1/2.
     fn abs(&self) -> CalculatorFloatWrapper {
         CalculatorFloatWrapper {
             cf_internal: self.cc_internal.norm(),
@@ -182,14 +242,29 @@ impl CalculatorComplexWrapper {
 
 #[pyproto]
 impl PyObjectProtocol for CalculatorComplexWrapper {
+    /// Return the __repr__ magic method to represent objects in Python of CalculatorComplex.
     fn __repr__(&self) -> PyResult<String> {
         Ok(format!("{}", self.cc_internal))
     }
 
+    /// Return the __format__ magic method to represent objects in Python of CalculatorComplex.
     fn __format__(&self, _format_spec: &str) -> PyResult<String> {
         Ok(format!("{}", self.cc_internal))
     }
 
+    /// Return the __richcmp__ magic method to perform rich comparison.
+    /// operations on CalculatorComplex.
+    ///
+    /// # Arguments
+    ///
+    /// * `&self` - the CalculatorComplexWrapper object
+    /// * `other` - the object to compare self to
+    /// * `op` - equal or not equal
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<bool>` - whether the two operations compared evaluated to True or False
+    ///
     fn __richcmp__(&self, other: Py<PyAny>, op: CompareOp) -> PyResult<bool> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -209,6 +284,17 @@ impl PyObjectProtocol for CalculatorComplexWrapper {
 
 #[pyproto]
 impl PyNumberProtocol for CalculatorComplexWrapper {
+    /// Implement the `+` (__add__) magic method to add two CalculatorComplexes.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - the first CalculatorComplexWrapper object in the operation
+    /// * `rhs` - the second CalculatorComplexWrapper object in the operation
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<CalculatorComplexWrapper>` - lhs + rhs
+    ///
     fn __add__(
         lhs: Py<PyAny>,
         rhs: Py<PyAny>,
@@ -227,6 +313,15 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
             cc_internal: (self_cc + other_cc),
         })
     }
+
+    /// Implement the `+=` (__iadd__) magic method to add a CalculatorComplex
+    /// to another CalculatorComplex.
+    ///
+    /// # Arguments
+    ///
+    /// * `self` - the CalculatorComplexWrapper object
+    /// * `other` - the CalculatorComplexWrapper object to be added to self
+    ///
     fn __iadd__(&'p mut self, other: Py<PyAny>) -> PyResult<()> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -238,6 +333,17 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
         Ok(())
     }
 
+    /// Implement the `-` (__sub__) magic method to subtract two CalculatorComplexes.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - the first CalculatorComplexWrapper object in the operation
+    /// * `rhs` - the second CalculatorComplexWrapper object in the operation
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<CalculatorComplexWrapper>` - lhs - rhs
+    ///
     fn __sub__(
         lhs: Py<PyAny>,
         rhs: Py<PyAny>,
@@ -256,6 +362,15 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
             cc_internal: (self_cc - other_cc),
         })
     }
+
+    /// Implement the `-=` (__isub__) magic method to subtract a CalculatorComplex
+    /// from another CalculatorComplex.
+    ///
+    /// # Arguments
+    ///
+    /// * `self` - the CalculatorComplexWrapper object
+    /// * `other` - the CalculatorComplexWrapper object to be subtracted from self
+    ///
     fn __isub__(&'p mut self, other: Py<PyAny>) -> PyResult<()> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -267,6 +382,17 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
         Ok(())
     }
 
+    /// Implement the `*` (__mul__) magic method to multiply two CalculatorComplexes.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - the first CalculatorComplexWrapper object in the operation
+    /// * `rhs` - the second CalculatorComplexWrapper object in the operation
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<CalculatorComplexWrapper>` - lhs * rhs
+    ///
     fn __mul__(
         lhs: Py<PyAny>,
         rhs: Py<PyAny>,
@@ -285,6 +411,15 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
             cc_internal: (self_cc * other_cc),
         })
     }
+
+    /// Implement the `*=` (__imul__) magic method to multiply a CalculatorComplex
+    /// by another CalculatorComplex.
+    ///
+    /// # Arguments
+    ///
+    /// * `self` - the CalculatorComplexWrapper object
+    /// * `other` - the CalculatorComplexWrapper object to multiply self by
+    ///
     fn __imul__(&'p mut self, other: Py<PyAny>,) -> PyResult<()> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -296,6 +431,17 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
         Ok(())
     }
 
+    /// Implement the `/` (__truediv__) magic method to divide two CalculatorComplexes.
+    ///
+    /// # Arguments
+    ///
+    /// * `lhs` - the first CalculatorComplexWrapper object in the operation
+    /// * `rhs` - the second CalculatorComplexWrapper object in the operation
+    ///
+    /// # Returns
+    ///
+    /// `PyResult<CalculatorComplexWrapper>` - lhs / rhs
+    ///
     fn __truediv__(
         lhs: Py<PyAny>,
         rhs: Py<PyAny>,
@@ -316,6 +462,15 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
             Err(_) => Err(PyZeroDivisionError::new_err("Division by zero!")),
         }
     }
+
+    /// Implement the `/=` (__itruediv__) magic method to divide a CalculatorComplex
+    /// by another CalculatorComplex.
+    ///
+    /// # Arguments
+    ///
+    /// * `self` - the CalculatorComplexWrapper object
+    /// * `other` - the CalculatorComplexWrapper object to divide self by
+    ///
     fn __itruediv__(&'p mut self, other: Py<PyAny>) -> PyResult<()> {
         let gil = pyo3::Python::acquire_gil();
         let py = gil.python();
@@ -332,22 +487,37 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
         Ok(())
     }
 
+    /// Implement Python minus sign for CalculatorComplex.
     fn __neg__(&'p self) -> PyResult<CalculatorComplexWrapper> {
         Ok(CalculatorComplexWrapper {
             cc_internal: -self.cc_internal.clone(),
         })
     }
+
+    /// Return Python absolute value abs(x) for CalculatorComplex.
     fn __abs__(&'p self) -> PyResult<CalculatorFloatWrapper> {
         Ok(CalculatorFloatWrapper {
             cf_internal: self.cc_internal.norm(),
         })
     }
+
+    /// Implement Python Inverse `1/x` for CalculatorComplex.
     fn __invert__(&'p self) -> PyResult<CalculatorComplexWrapper> {
         Ok(CalculatorComplexWrapper {
             cc_internal: self.cc_internal.recip(),
         })
     }
 
+    /// Implement the x.__float__() (float(x)) Python magic method to convert a CalculatorComplex
+    /// into a float.
+    ///
+    /// # Returns
+    ///
+    /// * `PyResult<f64>`
+    ///
+    /// Converts the Rust Panic when CalculatorComplex contains symbolic string value
+    /// into a Python error
+    ///
     fn __float__(&'p self) -> PyResult<f64> {
         let fl: Result<f64, CalculatorError> =
             CalculatorComplex::try_into(self.cc_internal.clone());
@@ -357,6 +527,16 @@ impl PyNumberProtocol for CalculatorComplexWrapper {
         }
     }
 
+    /// Implement the x.__complex__() (complex(x)) Python magic method to convert a
+    /// CalculatorComplex into a complex.
+    ///
+    /// # Returns
+    ///
+    /// * `PyResult<Complex<f64>>`
+    ///
+    /// Converts the Rust Panic when CalculatorComplex contains symbolic string value
+    /// into a Python error
+    ///
     fn __complex__(&'p self) -> PyResult<Complex<f64>> {
         let com: Result<Complex<f64>, CalculatorError> =
             CalculatorComplex::try_into(self.cc_internal.clone());
