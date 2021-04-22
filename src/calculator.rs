@@ -17,7 +17,7 @@ use qoqo_calculator::Calculator;
 
 #[pyclass(name = "Calculator", module = "qoqo_calculator_pyo3")]
 pub struct CalculatorWrapper {
-    r_calculator: Calculator,
+    pub r_calculator: Calculator,
 }
 #[pymethods]
 impl CalculatorWrapper {

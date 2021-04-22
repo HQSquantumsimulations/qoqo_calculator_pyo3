@@ -224,7 +224,7 @@ impl PyNumberProtocol for CalculatorFloatWrapper {
         })
     }
     fn __isub__(&'p mut self, other: IntoCalculatorFloat) -> PyResult<()> {
-        let other_cf = other.cast_to_calculator_float();
+        let other_cf: CalculatorFloat = other.cast_to_calculator_float();
         self.cf_internal -= other_cf;
         Ok(())
     }
