@@ -349,10 +349,6 @@ impl PyNumberProtocol for CalculatorFloatWrapper {
             cf_internal: (self_cf - other_cf),
         })
     }
-<<<<<<< HEAD
-    fn __isub__(&'p mut self, other: IntoCalculatorFloat) -> PyResult<()> {
-        let other_cf: CalculatorFloat = other.cast_to_calculator_float();
-=======
 
     /// Implement the `-=` (__isub__) magic method to subtract a CalculatorFloat
     /// from another CalculatorFloat.
@@ -369,7 +365,6 @@ impl PyNumberProtocol for CalculatorFloatWrapper {
         let other_cf = convert_into_calculator_float(other_ref).map_err(|_| {
             PyTypeError::new_err("Right hand side can not be converted to Calculator Float")
         })?;
->>>>>>> 3e48b791df2e18ead02ca25ba5b9d00b4f32c55c
         self.cf_internal -= other_cf;
         Ok(())
     }
