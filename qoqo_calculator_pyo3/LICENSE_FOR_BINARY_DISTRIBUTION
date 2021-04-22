@@ -74,10 +74,10 @@ which is available under the Apache 2.0 license.
 This product in binary form bundles scopeguard 1.1.0 ( https://github.com/bluss/scopeguard), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles serde 1.0.124 ( https://github.com/serde-rs/serde), 
+This product in binary form bundles serde 1.0.125 ( https://github.com/serde-rs/serde), 
 which is available under the Apache 2.0 license.
 
-This product in binary form bundles serde_derive 1.0.124 ( https://github.com/serde-rs/serde), 
+This product in binary form bundles serde_derive 1.0.125 ( https://github.com/serde-rs/serde), 
 which is available under the Apache 2.0 license.
 
 This product in binary form bundles smallvec 1.6.1 (https://github.com/servo/rust-smallvec), 
