@@ -10,15 +10,18 @@
 // express or implied. See the License for the specific language governing permissions and
 // limitations underthe License.
 
+//! library module
+//!
+//! qoqo_calculator_pyo3 module bringing the qoqo_calculator rust library to Python.
+
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
 mod calculator_float;
-pub use calculator_float::convert_into_calculator_float;
 pub use calculator_float::CalculatorFloatWrapper;
-pub use calculator_float::IntoCalculatorFloat;
+pub use calculator_float::convert_into_calculator_float;
 mod calculator_complex;
 pub use calculator_complex::CalculatorComplexWrapper;
-pub use calculator_complex::IntoCalculatorComplex;
+pub use calculator_complex::convert_into_calculator_complex;
 mod calculator;
 pub use calculator::parse_str;
 pub use calculator::CalculatorWrapper;
@@ -28,12 +31,16 @@ fn parse_string(expression: &str) -> PyResult<f64> {
     parse_str(expression)
 }
 
-/// qoqo_calculator_pyo3 module bringing the qoqo_calculator rust library to python
+/// qoqo_calculator_pyo3 module bringing the qoqo_calculator rust library to Python.
 ///
-/// rcalcultor is a rust library implementing CalculatorFloat, a type that can
-/// contain a float or a symbolic math expression in string form.
+/// qoqo_calculator is a rust library implementing:
+/// * Calculator: a struct for parsing string expressions to floats
+/// * CalculatorFloat: a type that contains a float or a symbolic math
+///                    expression in string form.
+/// * CalculatorComplex: a type that contains a CalculatorFloat as the real part
+///                      and a CalculatorFloat as the imaginary part
 ///
-/// Uses the pyo3 rust crate to create the python bindings.
+/// Uses the pyo3 rust crate to create the Python bindings.
 ///
 #[pymodule]
 fn qoqo_calculator_pyo3(_py: Python, m: &PyModule) -> PyResult<()> {

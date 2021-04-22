@@ -1,6 +1,6 @@
 The source of this software is licensed under the Apache 2.0 license (see below)
 In building the binary distribution other products the following software are also used and linked
-For Copyright notices provided by the packages see NOTIC file
+For Copyright notices provided by the packages see NOTICE file
 
 This product in binary form bundles autocfg 1.0.1 ( https://github.com/cuviper/autocfg), 
 which is available under the Apache 2.0 license.

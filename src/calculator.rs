@@ -10,8 +10,13 @@
 // express or implied. See the License for the specific language governing permissions and
 // limitations underthe License.
 
-use crate::IntoCalculatorFloat;
-use pyo3::exceptions::PyValueError;
+//! calculator module
+//!
+//! Converts the qoqo_calculator Calculator struct for parsing string expressions to floats
+//! into a Python class.
+
+use crate::convert_into_calculator_float;
+use pyo3::exceptions::{PyValueError, PyTypeError};
 use pyo3::prelude::*;
 use qoqo_calculator::Calculator;
 
@@ -21,7 +26,11 @@ pub struct CalculatorWrapper {
 }
 #[pymethods]
 impl CalculatorWrapper {
-    /// Calculator class
+    /// Create new Python instance of CalculatorWrapper.
+    ///
+    /// # Returns
+    ///
+    /// `<Self>` - CalculatorWrapper instance of Calculator
     ///
     #[new]
     fn new() -> Self {
@@ -29,10 +38,23 @@ impl CalculatorWrapper {
         CalculatorWrapper { r_calculator }
     }
 
+    /// Set variable for Calculator.
+    ///
+    /// # Arguments
+    ///
+    /// * `variable_string` - string of the variable name
+    /// * `val` - Float value of the variable
+    ///
     fn set(&mut self, variable_string: &str, val: f64) {
         self.r_calculator.set_variable(variable_string, val);
     }
 
+    ///  Parse a string expression.
+    ///
+    /// # Arguments
+    ///
+    /// * `input` - Expression that is parsed
+    ///
     pub fn parse_str(&mut self, input: &str) -> PyResult<f64> {
         match self.r_calculator.parse_str(input) {
             Ok(x) => Ok(x),
@@ -43,13 +65,17 @@ impl CalculatorWrapper {
         }
     }
 
-    pub fn parse_get(&mut self, input: IntoCalculatorFloat) -> PyResult<f64> {
-        let out = match input {
-            IntoCalculatorFloat::CF(cfw) => self.r_calculator.parse_get(cfw.cf_internal),
-            IntoCalculatorFloat::S(expression) => self.r_calculator.parse_str(&expression),
-            IntoCalculatorFloat::F(fl) => Ok(fl),
-            IntoCalculatorFloat::I(fl) => Ok(fl as f64),
-        };
+    /// Parse an input to float.
+    ///
+    /// # Arguments
+    ///
+    /// * `input` - Parsed string CalculatorFloat or returns float value
+    ///
+    pub fn parse_get(&mut self, input: &PyAny) -> PyResult<f64> {
+        let converted = convert_into_calculator_float(input).map_err(|_| {
+            PyTypeError::new_err("Input can not be converted to Calculator Float")
+        })?;
+        let out = self.r_calculator.parse_get(converted);
         match out {
             Ok(x) => Ok(x),
             Err(x) => Err(PyValueError::new_err(format!("{:?}", x))),
@@ -57,6 +83,12 @@ impl CalculatorWrapper {
     }
 }
 
+///  Parse a string expression.
+///
+/// # Arguments
+///
+/// * `expression` - Expression that is parsed
+///
 pub fn parse_str(expression: &str) -> PyResult<f64> {
     let mut calculator = Calculator::new();
     match calculator.parse_str(expression) {
