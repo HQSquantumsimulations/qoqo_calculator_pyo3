@@ -227,9 +227,9 @@ dependencies = [
 
 [[package]]
 name = "qoqo_calculator"
-version = "0.1.1"
+version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3b2e85d104beaf519921b309d472f4b8c2fd4ca1dbfdc251823d0f3380ed46c4"
+checksum = "c1b2430d8171fb8812929f040d48b83f63ee16f69401ee626b79cfcb2efdd907"
 dependencies = [
  "num-complex",
  "serde",

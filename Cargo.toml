@@ -14,7 +14,7 @@ crate-type = ["cdylib", "rlib"]
 
 [dependencies]
 num-complex = "0.3" # older version to avoid issues with pyo3
-qoqo_calculator = "0.1.1"
+qoqo_calculator = "0.2.0"
 # Dependencies listed in exact version
 serde =  "1.0"
 thiserror = "1.0"
