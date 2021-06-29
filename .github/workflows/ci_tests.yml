@@ -48,6 +48,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip maturin pytest numpy
+      - name: Rust test
+        run:
+          cargo test --no-default-features
       - name: build
         run: |
           maturin build -i ${{ matrix.python.interpreter }}
